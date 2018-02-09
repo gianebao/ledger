@@ -28,7 +28,9 @@ func ExampleAccount_AddEntry() {
 	// 			"id": "t0001",
 	// 			"time": "2018-01-31T16:22:24+08:00",
 	// 			"description": "Initial transaction load",
-	// 			"references": [],
+	// 			"references": {
+	// 				"account": "x0001"
+	// 			},
 	// 			"amount": 10000.0000
 	// 		}
 	// 	]
