@@ -11,7 +11,8 @@ import (
 func ExampleAccount_AddEntry() {
 	a := model.NewAccount("x0001")
 
-	a.AddEntry(model.NewEntry("t0001", time.Unix(1517386944, 0), "Initial transaction load", 10000))
+	loc, _ := time.LoadLocation("Asia/Singapore")
+	a.AddEntry(model.NewEntry("t0001", time.Unix(1517386944, 0).In(loc), "Initial transaction load", 10000))
 
 	j, err := json.MarshalIndent(a, "", "\t")
 

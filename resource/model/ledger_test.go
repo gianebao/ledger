@@ -15,7 +15,8 @@ func ExampleNewLedger() {
 	l.AddAccount(model.NewAccount("AC00001"))
 	l.AddAccount(model.NewAccount("AC00002"))
 
-	l.Accounts["AC00001"].AddEntry(model.NewEntry("E0001", time.Unix(1517386944, 0), "Initialize account", 500))
+	loc, _ := time.LoadLocation("Asia/Singapore")
+	l.Accounts["AC00001"].AddEntry(model.NewEntry("E0001", time.Unix(1517386944, 0).In(loc), "Initialize account", 500))
 	l.Accounts["AC00001"].Entries[0].References["receipt-number"] = "xx123456789"
 
 	j, err := json.MarshalIndent(l, "", "\t")
@@ -75,7 +76,7 @@ func ExampleLedger_LoadCSV() {
 	}
 
 	fmt.Printf("[%s] txn: %s %s -- %.2f",
-		l.Accounts["AC00001"].Entries[0].DateTime,
+		l.Accounts["AC00001"].Entries[0].DateTime.Format(model.DefaultCSVTimeFormat),
 		l.Accounts["AC00001"].Entries[0].ID,
 		l.Accounts["AC00001"].Entries[0].References["account"],
 		l.Accounts["AC00001"].Entries[0].Amount)
@@ -85,5 +86,5 @@ func ExampleLedger_LoadCSV() {
 	// Balance for account AC00003: 819.4000
 	// Balance for account AC00004: 1039.0100
 	// Balance for account AC00005: 976.2500
-	// [2018-02-09 08:38:56 +0800 +08] txn: XX0010000001 AC00001 -- 1000.00
+	// [2018-02-09T08:38:56+08:00] txn: XX0010000001 AC00001 -- 1000.00
 }

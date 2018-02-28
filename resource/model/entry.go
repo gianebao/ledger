@@ -17,13 +17,16 @@ type Entry struct {
 const (
 	// DefaultCSVTimeFormat defines the date format when reading a CSV
 	DefaultCSVTimeFormat = time.RFC3339
+
+	// DefaultCSVTimezone defines the default timezone
+	DefaultCSVTimezone = "Europe/Dublin"
 )
 
 // NewEntry creates a new entry
-func NewEntry(id string, time time.Time, description string, amount Amount) Entry {
+func NewEntry(id string, t time.Time, description string, amount Amount) Entry {
 	e := Entry{
 		ID:          id,
-		DateTime:    time,
+		DateTime:    t,
 		Description: description,
 		References:  Reference{},
 		Amount:      amount,
