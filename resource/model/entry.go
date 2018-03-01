@@ -17,9 +17,6 @@ type Entry struct {
 const (
 	// DefaultCSVTimeFormat defines the date format when reading a CSV
 	DefaultCSVTimeFormat = time.RFC3339
-
-	// DefaultCSVTimezone defines the default timezone
-	DefaultCSVTimezone = "Europe/Dublin"
 )
 
 // NewEntry creates a new entry

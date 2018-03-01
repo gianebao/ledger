@@ -86,7 +86,8 @@ func (l *Ledger) LoadCSV(s string) error {
 		return fmt.Errorf("Error in parsing csv: %s", err)
 	}
 
-	if len(entries) < 1 {
+	// At most, just the header row
+	if len(entries) < 2 {
 		return nil
 	}
 
@@ -98,7 +99,7 @@ func (l *Ledger) LoadCSV(s string) error {
 		entry := entries[i]
 		for j := 0; j < len(fields); j++ {
 			if err = colFunc[j](&e, entry[j]); err != nil {
-				return err
+				return fmt.Errorf("Error parsing [%s] row: %d %v", fields[j], i, err)
 			}
 		}
 

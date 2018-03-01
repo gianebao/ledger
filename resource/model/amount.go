@@ -26,7 +26,7 @@ func (a Amount) MarshalJSON() ([]byte, error) {
 func NewAmountFromString(value string) (Amount, error) {
 	v, err := strconv.ParseFloat(value, 64)
 	if err != nil {
-		return 0, err
+		return 0, fmt.Errorf("model.NewAmountFromString: %s", err)
 	}
 
 	return Amount(v), nil
